@@ -18,8 +18,21 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader"
-      }
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'], // Add this line
+          },
+        },
+      },
+      {
+        test: /\.scss$/, // Add this test for SCSS files
+        use: [
+          'style-loader', // Creates `style` nodes from JS strings
+          'css-loader',   // Translates CSS into CommonJS
+          'sass-loader',  // Compiles Sass to CSS
+        ],
+      },
     ]
   },
   plugins: [
@@ -28,6 +41,7 @@ module.exports = {
     })
   ],
   devServer: {
-    contentBase: "docs/"
+    contentBase: "docs/",
+    disableHostCheck: true, // This bypasses host checking. Not recommended for production use.
   }
 };

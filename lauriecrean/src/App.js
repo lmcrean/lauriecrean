@@ -1,4 +1,5 @@
 import ReactDOM from "https://esm.sh/react-dom";
+import './App.scss';
 
 const YellowSquares = () => {
   return (
