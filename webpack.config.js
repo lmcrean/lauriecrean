@@ -2,7 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 
 module.exports = {
-  devtool: "cheap-eval-source-map",
+  devtool: "source-map",
   entry: "./docs/entry.js",
   output: {
     path: path.join(__dirname, "dist"),
@@ -26,6 +26,10 @@ module.exports = {
         },
       },
       {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
+      {
         test: /\.scss$/, // Add this test for SCSS files
         use: [
           'style-loader', // Creates `style` nodes from JS strings
@@ -41,7 +45,8 @@ module.exports = {
     })
   ],
   devServer: {
-    contentBase: "docs/",
-    disableHostCheck: true, // This bypasses host checking. Not recommended for production use.
+    static: {
+      directory: path.join(__dirname, 'docs'),
+    }
   }
 };

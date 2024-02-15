@@ -7,7 +7,7 @@
     "dist"
   ],
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider webpack serve --config webpack.config.js",
     "docs": "NODE_ENV=production webpack -p",
     "build": "babel src -d dist",
     "clean": "rm -rf dist",
@@ -19,15 +19,18 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
+    "css-loader": "^6.10.0",
     "gh-pages": "^6.1.1",
     "prism-react-renderer": "^0.1.6",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-transition-group": "^4.1.1",
+    "sass-loader": "^14.1.0",
+    "style-loader": "^3.3.4",
     "styletron-engine-atomic": "^1.4.0",
     "styletron-react": "^5.2.0",
-    "webpack": "^4.32.2",
-    "webpack-cli": "^3.3.2",
+    "webpack": "^5.90.2",
+    "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^3.4.1"
   },
   "peerDependencies": {
