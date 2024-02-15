@@ -1,17 +1,18 @@
-const path = require("path");
-const webpack = require("webpack");
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-  devtool: "source-map",
-  entry: "./docs/entry.js",
+  // Changed devtool for Webpack 5 compatibility
+  devtool: 'source-map', 
+  entry: './docs/entry.js',
   output: {
-    path: path.join(__dirname, "dist"),
-    filename: "bundle.js"
+    path: path.join(__dirname, 'dist'),
+    filename: 'bundle.js',
   },
   resolve: {
     alias: {
-      atomize: path.join(__dirname, "src")
-    }
+      atomize: path.join(__dirname, 'src'),
+    },
   },
   module: {
     rules: [
@@ -21,32 +22,38 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'], // Add this line
+            presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader'], // For CSS files
       },
       {
-        test: /\.scss$/, // Add this test for SCSS files
+        test: /\.scss$/, // For SCSS files
         use: [
-          'style-loader', // Creates `style` nodes from JS strings
-          'css-loader',   // Translates CSS into CommonJS
-          'sass-loader',  // Compiles Sass to CSS
+          'style-loader', // Injects styles into the DOM
+          'css-loader',   // Interprets @import and url() like import/require() and resolves them
+          'sass-loader',  // Loads and compiles SCSS files
         ],
       },
-    ]
+    ],
   },
   plugins: [
     new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
-    })
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    }),
   ],
+  // Updated devServer configuration for Webpack 5
   devServer: {
     static: {
       directory: path.join(__dirname, 'docs'),
-    }
-  }
+    },
+    compress: true, // Enables gzip compression for everything served
+    port: 8080, // Default port for webpack-dev-server
+    allowedHosts: 'all', // This allows all hostnames to access the dev server
+    open: true, // Open the browser after server had been started
+    hot: "only", // Enables Hot Module Replacement without page refresh as a fallback in case of build failures
+  },
 };

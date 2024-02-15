@@ -1,3 +1,5 @@
+//docs/App.js
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -108,7 +110,7 @@ const App = () => {
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
-
+// this was commented out from the original file
 // import React, { Component } from "react";
 // import { Provider as StyletronProvider, DebugEngine } from "styletron-react";
 // import { Client as Styletron } from "styletron-engine-atomic";
