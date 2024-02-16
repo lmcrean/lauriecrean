@@ -7,11 +7,9 @@
     "dist"
   ],
   "scripts": {
-    "start": "NODE_OPTIONS=--openssl-legacy-provider webpack serve --config webpack.config.js",
-    "docs": "NODE_ENV=production webpack -p",
-    "build": "babel src -d dist",
-    "clean": "rm -rf dist",
-    "dist": "yarn run clean && yarn run build"
+    "start": "node server.js",
+    "build": "webpack --mode production",
+    "heroku-postbuild": "npm run build"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
@@ -47,6 +45,9 @@
     "loader": "^2.1.1",
     "react-bootstrap": "^2.10.1",
     "sass": "^1.70.0",
-    "serve": "^14.2.1"
+    "serve": "^14.2.1",
+    "webpack": "^5.90.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.1",
   }
 }
